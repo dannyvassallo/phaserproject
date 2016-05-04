@@ -43928,49 +43928,49 @@ var e5i = {
             C[V5C] = D;
             S[Y8a]();
         },
-        xhrLoadWithXDR: function(C, D, L, T, M) {
-            var G = "onprogress",
-                S = "ontimeout",
-                H = "timeout",
-                Q = "m0Y";
-            if (!this[F1a] && (!this[e5i.O3m][r1][u0S] || e5i[Q](this[e5i.O3m][r1][S7C], 10))) {
-                this[F1a] = true;
-                console[s4]("Phaser.Loader - using XDomainRequest outside of IE 9");
-            }
-            var t = new window[S8a]();
-            t[Q8a]('GET', D, true);
-            t[N4a] = L;
-            t[H] = 3000;
-            M = M || this[t1C];
-            var q = this;
-            t.onerror = function() {
-                try {
-                    return M[e5i.t5t](q, C, t);
-                } catch (i) {
-                    q[Y8](C, i[y1C] || 'Exception');
-                }
-            };
-            t[S] = function() {
-                try {
-                    return M[e5i.t5t](q, C, t);
-                } catch (i) {
-                    q[Y8](C, i[y1C] || 'Exception');
-                }
-            };
-            t[G] = function() {};
-            t[b2S] = function() {
-                try {
-                    return T[e5i.t5t](q, C, t);
-                } catch (i) {
-                    q[Y8](C, i[y1C] || 'Exception');
-                }
-            };
-            C[x1a] = t;
-            C[V5C] = D;
-            setTimeout(function() {
-                t[Y8a]();
-            }, 0);
-        },
+        // xhrLoadWithXDR: function(C, D, L, T, M) {
+        //     var G = "onprogress",
+        //         S = "ontimeout",
+        //         H = "timeout",
+        //         Q = "m0Y";
+        //     if (!this[F1a] && (!this[e5i.O3m][r1][u0S] || e5i[Q](this[e5i.O3m][r1][S7C], 10))) {
+        //         this[F1a] = true;
+        //         console[s4]("Phaser.Loader - using XDomainRequest outside of IE 9");
+        //     }
+        //     var t = new window[S8a]();
+        //     t[Q8a]('GET', D, true);
+        //     t[N4a] = L;
+        //     t[H] = 3000;
+        //     M = M || this[t1C];
+        //     var q = this;
+        //     t.onerror = function() {
+        //         try {
+        //             return M[e5i.t5t](q, C, t);
+        //         } catch (i) {
+        //             q[Y8](C, i[y1C] || 'Exception');
+        //         }
+        //     };
+        //     t[S] = function() {
+        //         try {
+        //             return M[e5i.t5t](q, C, t);
+        //         } catch (i) {
+        //             q[Y8](C, i[y1C] || 'Exception');
+        //         }
+        //     };
+        //     t[G] = function() {};
+        //     t[b2S] = function() {
+        //         try {
+        //             return T[e5i.t5t](q, C, t);
+        //         } catch (i) {
+        //             q[Y8](C, i[y1C] || 'Exception');
+        //         }
+        //     };
+        //     C[x1a] = t;
+        //     C[V5C] = D;
+        //     setTimeout(function() {
+        //         t[Y8a]();
+        //     }, 0);
+        // },
         getAudioURL: function(i) {
             var C = "lastIndexOf",
                 D = "d0Y",
