@@ -16030,7 +16030,7 @@ var e5i = {
                     V4H = -1133584399,
                     f4H = -1409429730;
                 if (e5i.P9A.I9A(9, 6174242) !== e4H && e5i.P9A.I9A(0, 9134522, 7) !== x4H && e5i.P9A.I9A(0, 2118577) !== V4H && e5i.P9A.I9A(0, 9732524) !== f4H) {
-                    this._watchList.reset();
+                    // this._watchList.reset();
                     tile.resetCollision();
                     return A29 - i39;
                 } else {
