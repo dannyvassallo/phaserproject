@@ -58,13 +58,13 @@ BasicGame.Game.prototype = {
     this.stick = this.pad.addDPad(0, 0, 200, 'dpad');
     this.stick.alignBottomLeft(0);
 
-    this.buttonA = this.pad.addButton(500, 520, 'dpad', 'button1-up', 'button1-down');
+    this.buttonA = this.pad.addButton((this.game.width - 300), 520, 'dpad', 'button1-up', 'button1-down');
     this.buttonA.onDown.add(this.pressButtonA, this);
 
-    this.buttonB = this.pad.addButton(615, 450, 'dpad', 'button2-up', 'button2-down');
+    this.buttonB = this.pad.addButton((this.game.width - 200), 450, 'dpad', 'button2-up', 'button2-down');
     this.buttonB.onDown.add(this.pressButtonB, this);
 
-    this.buttonC = this.pad.addButton(730, 520, 'dpad', 'button3-up', 'button3-down');
+    this.buttonC = this.pad.addButton((this.game.width - 100), 520, 'dpad', 'button3-up', 'button3-down');
     this.buttonC.onDown.add(this.pressButtonC, this);
 
     this.stage.backgroundColor = '#000000';
@@ -130,9 +130,6 @@ BasicGame.Game.prototype = {
 
 
   update: function () {
-
-    var maxSpeed = 1500;
-
 
     this.physics.arcade.collide(this.sprite, layer);
 
@@ -213,6 +210,18 @@ BasicGame.Game.prototype = {
     //  Then let's go back to the main menu.
     this.state.start('MainMenu');
 
+  },
+
+  resize: function(){
+    this.buttonA.destroy();
+    this.buttonA = this.pad.addButton((this.game.width - 300), 520, 'dpad', 'button1-up', 'button1-down');
+    this.buttonA.onDown.add(this.pressButtonA, this);
+    this.buttonB.destroy();
+    this.buttonB = this.pad.addButton((this.game.width - 200), 450, 'dpad', 'button2-up', 'button2-down');
+    this.buttonB.onDown.add(this.pressButtonB, this);
+    this.buttonC.destroy();
+    this.buttonC = this.pad.addButton((this.game.width - 100), 520, 'dpad', 'button3-up', 'button3-down');
+    this.buttonC.onDown.add(this.pressButtonC, this);
   },
 
   render: function(game){
