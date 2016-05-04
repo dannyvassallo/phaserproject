@@ -16029,13 +16029,13 @@ var e5i = {
                     x4H = -1167284290,
                     V4H = -1133584399,
                     f4H = -1409429730;
-                if (e5i.P9A.I9A(9, 6174242) !== e4H && e5i.P9A.I9A(0, 9134522, 7) !== x4H && e5i.P9A.I9A(0, 2118577) !== V4H && e5i.P9A.I9A(0, 9732524) !== f4H) {
-                    // this._watchList.reset();
-                    tile.resetCollision();
-                    return A29 - i39;
-                } else {
+                // if (e5i.P9A.I9A(9, 6174242) !== e4H && e5i.P9A.I9A(0, 9134522, 7) !== x4H && e5i.P9A.I9A(0, 2118577) !== V4H && e5i.P9A.I9A(0, 9732524) !== f4H) {
+                //     this._watchList.reset();
+                //     tile.resetCollision();
+                //     return A29 - i39;
+                // } else {
                     j[e5i.L1F] = i;
-                }
+                // }
             },
             F4S = function() {
                 var X6H = -99370138,
