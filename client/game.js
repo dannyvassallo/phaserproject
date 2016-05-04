@@ -1,8 +1,7 @@
 var map;
 var tileset;
 var layer;
-var player;
-var facing = 'left';
+var facing = 'right';
 var jumpTimer = 0;
 var cursors;
 var jumpButton;
@@ -32,24 +31,52 @@ BasicGame.Game = function (game) {
     //  You can use any of these from any function within this State.
     //  But do consider them as being 'reserved words', i.e. don't create a property for your own game called "world" or you'll over-write the world reference.
 
+    // joystick
+    this.sprite;
+    this.pad;
+
+    this.stick;
+
+    this.buttonA;
+    this.buttonB;
+    this.buttonC;
+
 };
 
 BasicGame.Game.prototype = {
 
-  create: function (game) {
+  init: function () {
+    this.game.renderer.renderSession.roundPixels = true;
+    this.physics.startSystem(Phaser.Physics.ARCADE);
+  },
 
-    game.physics.startSystem(Phaser.Physics.ARCADE);
+  create: function () {
+    // this.physics.arcade.enable(this.sprite);
 
-    game.stage.backgroundColor = '#000000';
+    this.pad = this.game.plugins.add(Phaser.VirtualJoystick);
 
-    bg = game.add.tileSprite(0, 0, 800, 600, 'background');
+    this.stick = this.pad.addDPad(0, 0, 200, 'dpad');
+    this.stick.alignBottomLeft(0);
+
+    this.buttonA = this.pad.addButton(500, 520, 'dpad', 'button1-up', 'button1-down');
+    this.buttonA.onDown.add(this.pressButtonA, this);
+
+    this.buttonB = this.pad.addButton(615, 450, 'dpad', 'button2-up', 'button2-down');
+    this.buttonB.onDown.add(this.pressButtonB, this);
+
+    this.buttonC = this.pad.addButton(730, 520, 'dpad', 'button3-up', 'button3-down');
+    this.buttonC.onDown.add(this.pressButtonC, this);
+
+    this.stage.backgroundColor = '#000000';
+
+    bg = this.add.tileSprite(0, 0, 800, 600, 'background');
     bg.x = 0;
     bg.y = 0;
-    bg.height = game.height;
-    bg.width = game.width;
+    bg.height = this.game.height;
+    bg.width = this.game.width;
     bg.fixedToCamera = true;
 
-    map = game.add.tilemap('level1');
+    map = this.add.tilemap('level1');
 
     map.addTilesetImage('tiles-1');
 
@@ -62,75 +89,118 @@ BasicGame.Game.prototype = {
 
     layer.resizeWorld();
 
-    game.physics.arcade.gravity.y = 450;
+    this.physics.arcade.gravity.y = 450;
 
-    player = game.add.sprite(32, 32, 'dude');
-    game.physics.enable(player, Phaser.Physics.ARCADE);
+    this.sprite = this.add.sprite(32, 32, 'dude');
+    this.physics.enable(this.sprite, Phaser.Physics.ARCADE);
 
-    player.body.bounce.y = 0.1;
-    player.body.collideWorldBounds = true;
-    player.body.setSize(20, 32, 5, 16);
+    this.sprite.body.bounce.y = 0.1;
+    this.sprite.body.collideWorldBounds = true;
+    this.sprite.body.setSize(20, 32, 5, 16);
 
-    player.animations.add('left', [0, 1, 2, 3], 10, true);
-    player.animations.add('turn', [4], 20, true);
-    player.animations.add('right', [5, 6, 7, 8], 10, true);
+    this.sprite.animations.add('left', [0, 1, 2, 3], 10, true);
+    this.sprite.animations.add('turn', [4], 20, true);
+    this.sprite.animations.add('right', [5, 6, 7, 8], 10, true);
 
-    game.camera.follow(player);
+    this.camera.follow(this.sprite);
 
-    cursors = game.input.keyboard.createCursorKeys();
-    jumpButton = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+    cursors = this.input.keyboard.createCursorKeys();
+    jumpButton = this.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 
   },
 
-  update: function (game) {
+  pressButtonA: function () {
+    if( this.sprite.body.onFloor() && this.time.now > jumpTimer ){
+      this.sprite.body.velocity.y = -250;
+      jumpTimer = this.time.now + 750;
+    }
+  },
 
-    game.physics.arcade.collide(player, layer);
+  pressButtonB: function () {
 
-    player.body.velocity.x = 0;
+      // this.sprite.scale.set(Math.random() * 4);
 
-    if (cursors.left.isDown)
-    {
-        player.body.velocity.x = -150;
+  },
 
-        if (facing != 'left')
+  pressButtonC: function () {
+
+      // this.sprite.scale.set(1);
+      // this.sprite.tint = 0xFFFFFF;
+  },
+
+
+  update: function () {
+
+    var maxSpeed = 1500;
+
+
+    this.physics.arcade.collide(this.sprite, layer);
+
+    this.sprite.body.velocity.x = 0;
+
+        if (this.stick.isDown && this.stick.direction === Phaser.LEFT)
         {
-            player.animations.play('left');
+          this.sprite.body.velocity.x = -150;
+          this.sprite.animations.play('left');
+          if (facing != 'left'){
             facing = 'left';
+          }
         }
-    }
-    else if (cursors.right.isDown)
-    {
-        player.body.velocity.x = 150;
-
-        if (facing != 'right')
+        else if (this.stick.isDown && this.stick.direction === Phaser.RIGHT)
         {
-            player.animations.play('right');
+          this.sprite.body.velocity.x = 150;
+          this.sprite.animations.play('right');
+          if (facing != 'right'){
             facing = 'right';
+          }
         }
-    }
-    else
-    {
-        if (facing != 'idle')
+        else
         {
-            player.animations.stop();
+          if (cursors.left.isDown)
+          {
+              this.sprite.body.velocity.x = -150;
 
-            if (facing == 'left')
-            {
-                player.frame = 0;
-            }
-            else
-            {
-                player.frame = 5;
-            }
+              if (facing != 'left')
+              {
+                  this.sprite.animations.play('left');
+                  facing = 'left';
+              }
+          }
+          else if (cursors.right.isDown)
+          {
+              this.sprite.body.velocity.x = 150;
 
-            facing = 'idle';
+              if (facing != 'right')
+              {
+                  this.sprite.animations.play('right');
+                  facing = 'right';
+              }
+          }
+          else
+          {
+              if (facing != 'idle')
+              {
+                  this.sprite.animations.stop();
+
+                  if (facing == 'left')
+                  {
+                      this.sprite.frame = 0;
+                  }
+                  else
+                  {
+                      this.sprite.frame = 5;
+                  }
+
+                  facing = 'idle';
+              }
+          }
         }
-    }
 
-    if (jumpButton.isDown && player.body.onFloor() && game.time.now > jumpTimer)
+
+    if (jumpButton.isDown && this.sprite.body.onFloor() && this.time.now > jumpTimer)
     {
-        player.body.velocity.y = -250;
-        jumpTimer = game.time.now + 750;
+        this.sprite.body.velocity.y = -250;
+        jumpTimer = this.time.now + 750;
     }
 
   },
@@ -146,9 +216,9 @@ BasicGame.Game.prototype = {
   },
 
   render: function(game){
-    game.debug.text(game.time.physicsElapsed, 32, 32);
-    game.debug.body(player);
-    game.debug.bodyInfo(player, 16, 24);
+    // game.debug.text(game.time.physicsElapsed, 32, 32);
+    // game.debug.body(this.sprite);
+    // game.debug.bodyInfo(this.sprite, 16, 24);
   }
 
 };
