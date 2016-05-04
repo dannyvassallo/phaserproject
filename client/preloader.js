@@ -31,12 +31,19 @@ BasicGame.Preloader.prototype = {
       this.load.image('tetris3', 'assets/sprites/tetrisblock3.png');
       this.load.image('hotdog', 'assets/sprites/hotdog.png');
       this.load.image('starfield', 'assets/skies/deep-space.jpg');
+      this.load.tilemap('level1', 'assets/level1.json', null, Phaser.Tilemap.TILED_JSON);
+      this.load.image('tiles-1', 'assets/tiles-1.png');
+      this.load.spritesheet('dude', 'assets/dude.png', 32, 48);
+      this.load.spritesheet('droid', 'assets/droid.png', 32, 32);
+      this.load.image('starSmall', 'assets/star.png');
+      this.load.image('starBig', 'assets/star2.png');
+      this.load.image('background', 'assets/background2.png');
 
   },
 
   create: function () {
 
-    this.state.start('MainMenu');
+    this.state.start('Game');
 
   }
 

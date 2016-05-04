@@ -1,3 +1,13 @@
+var map;
+var tileset;
+var layer;
+var player;
+var facing = 'left';
+var jumpTimer = 0;
+var cursors;
+var jumpButton;
+var bg;
+
 BasicGame.Game = function (game) {
 
   //  When a State is added to Phaser it automatically has the following properties set on it, even if they already exist:
@@ -26,15 +36,102 @@ BasicGame.Game = function (game) {
 
 BasicGame.Game.prototype = {
 
-  create: function () {
+  create: function (game) {
 
-    //  Honestly, just about anything could go here. It's YOUR game after all. Eat your heart out!
+    game.physics.startSystem(Phaser.Physics.ARCADE);
+
+    game.stage.backgroundColor = '#000000';
+
+    bg = game.add.tileSprite(0, 0, 800, 600, 'background');
+    bg.x = 0;
+    bg.y = 0;
+    bg.height = game.height;
+    bg.width = game.width;
+    bg.fixedToCamera = true;
+
+    map = game.add.tilemap('level1');
+
+    map.addTilesetImage('tiles-1');
+
+    map.setCollisionByExclusion([ 13, 14, 15, 16, 46, 47, 48, 49, 50, 51 ]);
+
+    layer = map.createLayer('Tile Layer 1');
+
+    //  Un-comment this on to see the collision tiles
+    // layer.debug = true;
+
+    layer.resizeWorld();
+
+    game.physics.arcade.gravity.y = 450;
+
+    player = game.add.sprite(32, 32, 'dude');
+    game.physics.enable(player, Phaser.Physics.ARCADE);
+
+    player.body.bounce.y = 0.1;
+    player.body.collideWorldBounds = true;
+    player.body.setSize(20, 32, 5, 16);
+
+    player.animations.add('left', [0, 1, 2, 3], 10, true);
+    player.animations.add('turn', [4], 20, true);
+    player.animations.add('right', [5, 6, 7, 8], 10, true);
+
+    game.camera.follow(player);
+
+    cursors = game.input.keyboard.createCursorKeys();
+    jumpButton = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 
   },
 
-  update: function () {
+  update: function (game) {
 
-    //  Honestly, just about anything could go here. It's YOUR game after all. Eat your heart out!
+    game.physics.arcade.collide(player, layer);
+
+    player.body.velocity.x = 0;
+
+    if (cursors.left.isDown)
+    {
+        player.body.velocity.x = -150;
+
+        if (facing != 'left')
+        {
+            player.animations.play('left');
+            facing = 'left';
+        }
+    }
+    else if (cursors.right.isDown)
+    {
+        player.body.velocity.x = 150;
+
+        if (facing != 'right')
+        {
+            player.animations.play('right');
+            facing = 'right';
+        }
+    }
+    else
+    {
+        if (facing != 'idle')
+        {
+            player.animations.stop();
+
+            if (facing == 'left')
+            {
+                player.frame = 0;
+            }
+            else
+            {
+                player.frame = 5;
+            }
+
+            facing = 'idle';
+        }
+    }
+
+    if (jumpButton.isDown && player.body.onFloor() && game.time.now > jumpTimer)
+    {
+        player.body.velocity.y = -250;
+        jumpTimer = game.time.now + 750;
+    }
 
   },
 
@@ -46,6 +143,12 @@ BasicGame.Game.prototype = {
     //  Then let's go back to the main menu.
     this.state.start('MainMenu');
 
+  },
+
+  render: function(game){
+    game.debug.text(game.time.physicsElapsed, 32, 32);
+    game.debug.body(player);
+    game.debug.bodyInfo(player, 16, 24);
   }
 
 };
