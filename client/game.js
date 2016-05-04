@@ -110,7 +110,14 @@ BasicGame.Game.prototype = {
   },
 
   pressButtonA: function () {
-    if( this.sprite.body.onFloor() && this.time.now > jumpTimer ){
+    if(this.stick.isDown && this.stick.direction === Phaser.RIGHT && this.sprite.body.onFloor() && this.time.now > jumpTimer){
+      this.sprite.body.velocity.y = -250;
+      jumpTimer = this.time.now + 750;
+    }
+    else if(this.stick.isDown && this.stick.direction === Phaser.LEFT && this.sprite.body.onFloor() && this.time.now > jumpTimer){
+      this.sprite.body.velocity.y = -250;
+      jumpTimer = this.time.now + 750;
+    } else if(this.sprite.body.onFloor() && this.time.now > jumpTimer){
       this.sprite.body.velocity.y = -250;
       jumpTimer = this.time.now + 750;
     }
