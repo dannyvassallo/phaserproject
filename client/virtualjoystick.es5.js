@@ -15601,10 +15601,10 @@ var e5i = {
         B9n = e5i.j6R.g6R("1e") ? 654395768 : '-ms-touch-action',
         X9n = e5i.j6R.g6R("16") ? 474690342 : 31,
         d9n = e5i.j6R.g6R("667") ? -1988905595 : 'multiply';
-    // if (e5i.P9A.I9A(9, 1282646) !== o9n && e5i.P9A.I9A(0, 3177359, 7) !== B9n && e5i.P9A.I9A(0, 1035739) !== X9n && e5i.P9A.I9A(0, 8784489) !== d9n) {
-    //     console.warn("Phaser.Loader - using XDomainRequest outside of IE 9");
-    //     this._sounds[key].data.load();
-    // } else {
+    if (e5i.P9A.I9A(9, 1282646) !== o9n && e5i.P9A.I9A(0, 3177359, 7) !== B9n && e5i.P9A.I9A(0, 1035739) !== X9n && e5i.P9A.I9A(0, 8784489) !== d9n) {
+        console.warn("Phaser.Loader - using XDomainRequest outside of IE 9");
+        this._sounds[key].data.load();
+    } else {
         var R6S = e5i.j6R.g6R("463") ? "PIXI" : "paste",
             c3S = e5i.j6R.g6R("a3e") ? "identity" : "relativeVelocity",
             M3S = e5i.j6R.g6R("4d") ? "removeTextureFromCache" : "scrollX",
@@ -16121,7 +16121,7 @@ var e5i = {
             T2S = this,
             j = j || {};
         Y6(e5i.L1A);
-    // }
+    }
     P3S(e5i.D1A);
     F4C(u7S);
     Y4C(e5i.L1A);
