@@ -8,7 +8,6 @@ var jumpButton;
 var bg;
 
 BasicGame.Game = function (game) {
-
   //  When a State is added to Phaser it automatically has the following properties set on it, even if they already exist:
 
     this.game;    //  a reference to the currently running game
@@ -110,8 +109,10 @@ BasicGame.Game.prototype = {
   },
 
   pressButtonA: function () {
-    this.sprite.body.velocity.y = -250;
-    jumpTimer = this.time.now + 750;
+    if( this.sprite.body.onFloor() && this.time.now > jumpTimer ){
+      this.sprite.body.velocity.y = -250;
+      jumpTimer = this.time.now + 750;
+    }
   },
 
   pressButtonB: function () {
@@ -223,6 +224,18 @@ BasicGame.Game.prototype = {
     this.buttonC.destroy();
     this.buttonC = this.pad.addButton((this.game.width - 100), (this.game.height - 80), 'dpad', 'button3-up', 'button3-down');
     this.buttonC.onDown.add(this.pressButtonC, this);
+    bg.x = 0;
+    bg.y = 0;
+    bg.height = this.game.height;
+    bg.width = this.game.width;
+    bg.fixedToCamera = true;
+    layer.destroy();
+    layer = map.createLayer('Tile Layer 1');
+
+    //  Un-comment this on to see the collision tiles
+    // layer.debug = true;
+
+    layer.resizeWorld();
   },
 
   render: function(game){

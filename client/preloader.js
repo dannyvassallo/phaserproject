@@ -4,7 +4,6 @@ BasicGame.Preloader = function (game) {
   this.preloadBar = null;
 
   this.ready = false;
-
 };
 
 BasicGame.Preloader.prototype = {

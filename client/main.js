@@ -13,6 +13,16 @@ Template.game.onCreated(function gameOnCreated() {
   game.state.add('Game', BasicGame.Game);
   //  Now start the Boot state.
   game.state.start('Boot');
-
-
 });
+
+Template.game.rendered = function(){
+  console.log('rendered');
+  setTimeout(function(){
+    $('body').append($('<div>').addClass('go-fullscreen'));
+    //using HTML5 for fullscreen (only newest Chrome + FF)
+    $(document).on('click', '.go-fullscreen',function(){
+      $("canvas")[0].webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT); //Chrome
+      $("canvas")[0].mozRequestFullScreen(); //Firefox
+    });
+  }, 10)
+};
