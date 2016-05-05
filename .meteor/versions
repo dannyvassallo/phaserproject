@@ -25,6 +25,7 @@ ejson@1.0.11
 es5-shim@4.5.10
 fastclick@1.0.11
 geojson-utils@1.0.8
+gnomathibus:meteor-phaser@2.4.4
 hot-code-push@1.0.4
 html-tools@1.0.9
 htmljs@1.0.9
@@ -54,7 +55,6 @@ random@1.0.9
 reactive-var@1.0.9
 reload@1.1.8
 retry@1.0.7
-robertlowe:meteor-phaser@2.2.1
 routepolicy@1.0.10
 spacebars@1.0.11
 spacebars-compiler@1.0.11
