@@ -9,7 +9,6 @@ BasicGame.Preloader = function (game) {
 BasicGame.Preloader.prototype = {
 
   preload: function () {
-
     this.load.atlas('dpad', 'assets/virtualjoystick/skins/dpad.png', 'assets/virtualjoystick/skins/dpad.json');
     this.load.image('ball', 'assets/virtualjoystick/beball1.png');
     this.load.image('bg', 'assets/virtualjoystick/space1.png');
