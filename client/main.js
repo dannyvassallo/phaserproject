@@ -3,6 +3,9 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import './main.html';
 
 Template.game.onCreated(function gameOnCreated() {
+
+  IDE_HOOK = true;
+  VERSION = '2.3.1.virtual-joystick';
   //  100% of the browser window - see Boot.js for additional configuration
   var game = new Phaser.Game("100%", "100%", Phaser.AUTO, '');
   //  Add the States your game has.

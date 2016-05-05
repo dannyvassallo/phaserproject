@@ -136,92 +136,63 @@ BasicGame.Game.prototype = {
 
     this.sprite.body.velocity.x = 0;
 
-        // if (this.stick.isDown && this.stick.direction === Phaser.LEFT)
-        // {
-        //   this.sprite.body.velocity.x = -150;
-        //   this.sprite.animations.play('left');
-        //   if (facing != 'left'){
-        //     facing = 'left';
-        //   }
-        // }
-        // else if (this.stick.isDown && this.stick.direction === Phaser.RIGHT)
-        // {
-        //   this.sprite.body.velocity.x = 150;
-        //   this.sprite.animations.play('right');
-        //   if (facing != 'right'){
-        //     facing = 'right';
-        //   }
-        // }
-        // else
-        // {
-        //   if (cursors.left.isDown)
-        //   {
-        //       this.sprite.body.velocity.x = -150;
-
-        //       if (facing != 'left')
-        //       {
-        //           this.sprite.animations.play('left');
-        //           facing = 'left';
-        //       }
-        //   }
-        //   else if (cursors.right.isDown)
-        //   {
-        //       this.sprite.body.velocity.x = 150;
-
-        //       if (facing != 'right')
-        //       {
-        //           this.sprite.animations.play('right');
-        //           facing = 'right';
-        //       }
-        //   }
-        //   else
-        //   {
-        //       if (facing != 'idle')
-        //       {
-        //           this.sprite.animations.stop();
-
-        //           if (facing == 'left')
-        //           {
-        //               this.sprite.frame = 0;
-        //           }
-        //           else
-        //           {
-        //               this.sprite.frame = 5;
-        //           }
-
-        //           facing = 'idle';
-        //       }
-        //   }
-        // }
-                var maxSpeed = 300;
-
-        if (this.stick.isDown)
+        if (this.stick.isDown && this.stick.direction === Phaser.LEFT)
         {
-            this.sprite.body.velocity.set(0);
-
-            if (this.stick.direction === Phaser.LEFT)
-            {
-                this.sprite.body.velocity.x = -maxSpeed;
-            }
-            else if (this.stick.direction === Phaser.RIGHT)
-            {
-                this.sprite.body.velocity.x = maxSpeed;
-            }
-            else if (this.stick.direction === Phaser.UP)
-            {
-                this.sprite.body.velocity.y = -maxSpeed;
-            }
-            else if (this.stick.direction === Phaser.DOWN)
-            {
-                this.sprite.body.velocity.y = maxSpeed;
-            }
+          this.sprite.body.velocity.x = -150;
+          this.sprite.animations.play('left');
+          if (facing != 'left'){
+            facing = 'left';
+          }
+        }
+        else if (this.stick.isDown && this.stick.direction === Phaser.RIGHT)
+        {
+          this.sprite.body.velocity.x = 150;
+          this.sprite.animations.play('right');
+          if (facing != 'right'){
+            facing = 'right';
+          }
         }
         else
         {
-            this.sprite.body.velocity.set(0);
+          if (cursors.left.isDown)
+          {
+              this.sprite.body.velocity.x = -150;
+
+              if (facing != 'left')
+              {
+                  this.sprite.animations.play('left');
+                  facing = 'left';
+              }
+          }
+          else if (cursors.right.isDown)
+          {
+              this.sprite.body.velocity.x = 150;
+
+              if (facing != 'right')
+              {
+                  this.sprite.animations.play('right');
+                  facing = 'right';
+              }
+          }
+          else
+          {
+              if (facing != 'idle')
+              {
+                  this.sprite.animations.stop();
+
+                  if (facing == 'left')
+                  {
+                      this.sprite.frame = 0;
+                  }
+                  else
+                  {
+                      this.sprite.frame = 5;
+                  }
+
+                  facing = 'idle';
+              }
+          }
         }
-
-
 
   },
 
