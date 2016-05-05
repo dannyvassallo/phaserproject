@@ -49,6 +49,14 @@ BasicGame.Game.prototype = {
     this.physics.startSystem(Phaser.Physics.ARCADE);
   },
 
+  preload: function () {
+
+      this.load.atlas('dpad', 'assets/virtualjoystick/skins/dpad.png', 'assets/virtualjoystick/skins/dpad.json');
+      this.load.image('ball', 'assets/virtualjoystick/beball1.png');
+      this.load.image('bg', 'assets/virtualjoystick/space2.png');
+
+  },
+
   create: function () {
     // this.physics.arcade.enable(this.sprite);
 
