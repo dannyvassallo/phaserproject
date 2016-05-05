@@ -54,17 +54,17 @@ BasicGame.Game.prototype = {
 
     this.pad = this.game.plugins.add(Phaser.VirtualJoystick);
 
-    this.stick = this.pad.addDPad(0, 0, 200, 'dpad');
+    this.stick = this.pad.addStick(0, 0, 200, 'arcade');
     this.stick.alignBottomLeft(0);
 
-    this.buttonA = this.pad.addButton((this.game.width - 300), (this.game.height - 80), 'dpad', 'button1-up', 'button1-down');
+    this.buttonA = this.pad.addButton((this.game.width - 300), (this.game.height - 80), 'arcade', 'button1-up', 'button1-down');
     this.buttonA.onDown.add(this.pressButtonA, this);
     this.buttonA.addKey(Phaser.Keyboard.SPACEBAR);
 
-    this.buttonB = this.pad.addButton((this.game.width - 200), (this.game.height - 160), 'dpad', 'button2-up', 'button2-down');
+    this.buttonB = this.pad.addButton((this.game.width - 200), (this.game.height - 160), 'arcade', 'button2-up', 'button2-down');
     this.buttonB.onDown.add(this.pressButtonB, this);
 
-    this.buttonC = this.pad.addButton((this.game.width - 100), (this.game.height - 80), 'dpad', 'button3-up', 'button3-down');
+    this.buttonC = this.pad.addButton((this.game.width - 100), (this.game.height - 80), 'arcade', 'button3-up', 'button3-down');
     this.buttonC.onDown.add(this.pressButtonC, this);
 
     this.stage.backgroundColor = '#000000';
@@ -193,6 +193,16 @@ BasicGame.Game.prototype = {
               }
           }
         }
+        var maxSpeed = 400;
+
+        if (this.stick.isDown)
+        {
+            this.physics.arcade.velocityFromRotation(this.stick.rotation, this.stick.force * maxSpeed, this.sprite.body.velocity);
+        }
+        else
+        {
+            this.sprite.body.velocity.set(0);
+        }
 
   },
 
@@ -208,7 +218,7 @@ BasicGame.Game.prototype = {
 
   resize: function(){
     this.stick.destroy();
-    this.stick = this.pad.addDPad(0, 0, 200, 'dpad');
+    this.stick = this.pad.addStick(0, 0, 200, 'arcade');
     this.stick.alignBottomLeft(0);
     this.buttonA.destroy();
     this.buttonA = this.pad.addButton((this.game.width - 300), (this.game.height - 80), 'dpad', 'button1-up', 'button1-down');
