@@ -5,10 +5,14 @@ body{
   overflow: hidden;
   position: relative;
   pointer-events: none;
+  z-index: -1;
 }
 
 canvas{
   margin: 0 auto;
+  pointer-events: auto;
+  position: absolute;
+  z-index: 99999999;
 }
 
 /*.go-fullscreen{
