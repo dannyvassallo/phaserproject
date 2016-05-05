@@ -59,6 +59,7 @@ BasicGame.Game.prototype = {
 
     this.buttonA = this.pad.addButton((this.game.width - 300), (this.game.height - 80), 'dpad', 'button1-up', 'button1-down');
     this.buttonA.onDown.add(this.pressButtonA, this);
+    this.buttonA.addKey(Phaser.Keyboard.SPACEBAR);
 
     this.buttonB = this.pad.addButton((this.game.width - 200), (this.game.height - 160), 'dpad', 'button2-up', 'button2-down');
     this.buttonB.onDown.add(this.pressButtonB, this);
@@ -118,6 +119,7 @@ BasicGame.Game.prototype = {
   pressButtonB: function () {
 
       // this.sprite.scale.set(Math.random() * 4);
+      this.sprite.scale.set(Math.random() * 4);
 
   },
 
@@ -152,28 +154,28 @@ BasicGame.Game.prototype = {
         }
         else
         {
-          if (cursors.left.isDown)
-          {
-              this.sprite.body.velocity.x = -150;
+          // if (cursors.left.isDown)
+          // {
+          //     this.sprite.body.velocity.x = -150;
 
-              if (facing != 'left')
-              {
-                  this.sprite.animations.play('left');
-                  facing = 'left';
-              }
-          }
-          else if (cursors.right.isDown)
-          {
-              this.sprite.body.velocity.x = 150;
+          //     if (facing != 'left')
+          //     {
+          //         this.sprite.animations.play('left');
+          //         facing = 'left';
+          //     }
+          // }
+          // else if (cursors.right.isDown)
+          // {
+          //     this.sprite.body.velocity.x = 150;
 
-              if (facing != 'right')
-              {
-                  this.sprite.animations.play('right');
-                  facing = 'right';
-              }
-          }
-          else
-          {
+          //     if (facing != 'right')
+          //     {
+          //         this.sprite.animations.play('right');
+          //         facing = 'right';
+          //     }
+          // }
+          // else
+          // {
               if (facing != 'idle')
               {
                   this.sprite.animations.stop();
@@ -189,15 +191,8 @@ BasicGame.Game.prototype = {
 
                   facing = 'idle';
               }
-          }
+          // }
         }
-
-
-    if (jumpButton.isDown && this.sprite.body.onFloor() && this.time.now > jumpTimer)
-    {
-        this.sprite.body.velocity.y = -250;
-        jumpTimer = this.time.now + 750;
-    }
 
   },
 
