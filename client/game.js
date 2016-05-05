@@ -45,8 +45,6 @@ BasicGame.Game = function (game) {
 BasicGame.Game.prototype = {
 
   init: function () {
-    console.log('loading');
-    this.load.script('joystick', 'phaser-virtual-joystick.min.js');
     this.game.renderer.renderSession.roundPixels = true;
     this.physics.startSystem(Phaser.Physics.ARCADE);
   },
@@ -116,6 +114,7 @@ BasicGame.Game.prototype = {
       this.sprite.body.velocity.y = -250;
       jumpTimer = this.time.now + 750;
     }
+    alert('pressed');
   },
 
   pressButtonB: function () {
