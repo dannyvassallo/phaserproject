@@ -154,28 +154,28 @@ BasicGame.Game.prototype = {
         }
         else
         {
-          // if (cursors.left.isDown)
-          // {
-          //     this.sprite.body.velocity.x = -150;
+          if (cursors.left.isDown)
+          {
+              this.sprite.body.velocity.x = -150;
 
-          //     if (facing != 'left')
-          //     {
-          //         this.sprite.animations.play('left');
-          //         facing = 'left';
-          //     }
-          // }
-          // else if (cursors.right.isDown)
-          // {
-          //     this.sprite.body.velocity.x = 150;
+              if (facing != 'left')
+              {
+                  this.sprite.animations.play('left');
+                  facing = 'left';
+              }
+          }
+          else if (cursors.right.isDown)
+          {
+              this.sprite.body.velocity.x = 150;
 
-          //     if (facing != 'right')
-          //     {
-          //         this.sprite.animations.play('right');
-          //         facing = 'right';
-          //     }
-          // }
-          // else
-          // {
+              if (facing != 'right')
+              {
+                  this.sprite.animations.play('right');
+                  facing = 'right';
+              }
+          }
+          else
+          {
               if (facing != 'idle')
               {
                   this.sprite.animations.stop();
@@ -191,7 +191,7 @@ BasicGame.Game.prototype = {
 
                   facing = 'idle';
               }
-          // }
+          }
         }
 
   },

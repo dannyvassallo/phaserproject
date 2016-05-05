@@ -13,7 +13,6 @@ caching-compiler@1.0.4
 caching-html-compiler@1.0.6
 callback-hook@1.0.8
 check@1.2.1
-cscottnet:es5-shim@4.4.1
 ddp@1.2.5
 ddp-client@1.2.7
 ddp-common@1.2.5
@@ -48,6 +47,7 @@ modules-runtime@0.6.3
 mongo@1.1.7
 mongo-id@1.0.4
 npm-mongo@1.4.43
+oaalto:meteor-phaser@2.4.4
 observe-sequence@1.0.11
 ordered-dict@1.0.7
 promise@0.6.7
@@ -55,7 +55,6 @@ random@1.0.9
 reactive-var@1.0.9
 reload@1.1.8
 retry@1.0.7
-robertlowe:meteor-phaser@2.2.1
 routepolicy@1.0.10
 spacebars@1.0.11
 spacebars-compiler@1.0.11
