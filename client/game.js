@@ -144,6 +144,7 @@ BasicGame.Game.prototype = {
           if (facing != 'left'){
             facing = 'left';
           }
+          this.buttonA.onDown.add(this.pressButtonA, this);
         }
         else if (this.stick.isDown && this.stick.direction === Phaser.RIGHT)
         {
