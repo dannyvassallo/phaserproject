@@ -118,7 +118,12 @@ BasicGame.Game.prototype = {
   },
 
   pressButtonA: function () {
-    if( this.sprite.body.onFloor() && this.time.now > jumpTimer ){
+    if(this.input.pointer1.isDown && this.sprite.body.onFloor() && this.time.now > jumpTimer)
+    {
+      this.sprite.body.velocity.y = -250;
+      jumpTimer = this.time.now + 750;
+    }
+    else if(this.sprite.body.onFloor() && this.time.now > jumpTimer ){
       this.sprite.body.velocity.y = -250;
       jumpTimer = this.time.now + 750;
     }
