@@ -77,12 +77,12 @@ BasicGame.Game.prototype = {
 
     this.stage.backgroundColor = '#000000';
 
-    bg = this.add.tileSprite(0, 0, 800, 600, 'background');
-    bg.x = 0;
-    bg.y = 0;
-    bg.height = this.game.height;
-    bg.width = this.game.width;
-    bg.fixedToCamera = true;
+    // bg = this.add.tileSprite(0, 0, 800, 600, 'background');
+    // bg.x = 0;
+    // bg.y = 0;
+    // bg.height = this.game.height;
+    // bg.width = this.game.width;
+    // bg.fixedToCamera = true;
 
     map = this.add.tilemap('level1');
 
@@ -232,11 +232,11 @@ BasicGame.Game.prototype = {
     this.buttonC.destroy();
     this.buttonC = this.pad.addButton((this.game.width - 100), (this.game.height - 80), 'dpad', 'button3-up', 'button3-down');
     this.buttonC.onDown.add(this.pressButtonC, this);
-    bg.x = 0;
-    bg.y = 0;
-    bg.height = this.game.height;
-    bg.width = this.game.width;
-    bg.fixedToCamera = true;
+    // bg.x = 0;
+    // bg.y = 0;
+    // bg.height = this.game.height;
+    // bg.width = this.game.width;
+    // bg.fixedToCamera = true;
     layer.destroy();
     layer = map.createLayer('Tile Layer 1');
 
