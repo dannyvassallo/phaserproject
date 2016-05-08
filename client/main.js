@@ -29,10 +29,8 @@ Template.game.rendered = function(){
 
 Template.game.helpers({
   gameGestures: {
-    'swipeleft ul li': function (event, templateInstance) {
-      /* `event` is the Hammer.js event object */
-      /* `templateInstance` is the `Blaze.TemplateInstance` */
-      /* `this` is the data context of the element in your template, so in this case `someField` from `someArray` in the template */
+    'tap .buttonA': function (event, templateInstance) {
+        alert('tapped');
     }
   }
 });

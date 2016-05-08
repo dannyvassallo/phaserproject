@@ -68,7 +68,10 @@ BasicGame.Game.prototype = {
     this.buttonA = this.pad.addButton((this.game.width - 300), (this.game.height - 80), 'dpad', 'button1-up', 'button1-down');
     this.buttonA.onDown.add(this.pressButtonA, this);
     this.buttonA.addKey(Phaser.Keyboard.SPACEBAR);
-
+    var tapDiv = $('<div>').addClass('buttonA');
+    $(tapDiv).css('left',(this.game.width - 350));
+    $(tapDiv).css('top',(this.game.height - 130));
+    $('body').append(tapDiv);
     this.buttonB = this.pad.addButton((this.game.width - 200), (this.game.height - 160), 'dpad', 'button2-up', 'button2-down');
     this.buttonB.onDown.add(this.pressButtonB, this);
 
