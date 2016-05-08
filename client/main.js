@@ -26,11 +26,3 @@ Template.game.rendered = function(){
     });
   }, 10)
 };
-
-Template.game.helpers({
-  gameGestures: {
-    'tap .buttonA': function (event, templateInstance) {
-        alert('tapped');
-    }
-  }
-});

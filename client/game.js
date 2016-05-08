@@ -68,15 +68,16 @@ BasicGame.Game.prototype = {
     this.buttonA = this.pad.addButton((this.game.width - 300), (this.game.height - 80), 'dpad', 'button1-up', 'button1-down');
     this.buttonA.onDown.add(this.pressButtonA, this);
     this.buttonA.addKey(Phaser.Keyboard.SPACEBAR);
-    var tapDiv = $('<div>').addClass('buttonA');
-    $(tapDiv).css('left',(this.game.width - 350));
-    $(tapDiv).css('top',(this.game.height - 130));
-    $('body').append(tapDiv);
-    this.buttonB = this.pad.addButton((this.game.width - 200), (this.game.height - 160), 'dpad', 'button2-up', 'button2-down');
-    this.buttonB.onDown.add(this.pressButtonB, this);
+    this.buttonA.alignBottomRight(0);
+    // var tapDiv = $('<div>').addClass('buttonA');
+    // $(tapDiv).css('left',(this.game.width - 350));
+    // $(tapDiv).css('top',(this.game.height - 130));
+    // $('body').append(tapDiv);
+    // this.buttonB = this.pad.addButton((this.game.width - 200), (this.game.height - 160), 'dpad', 'button2-up', 'button2-down');
+    // this.buttonB.onDown.add(this.pressButtonB, this);
 
-    this.buttonC = this.pad.addButton((this.game.width - 100), (this.game.height - 80), 'dpad', 'button3-up', 'button3-down');
-    this.buttonC.onDown.add(this.pressButtonC, this);
+    // this.buttonC = this.pad.addButton((this.game.width - 100), (this.game.height - 80), 'dpad', 'button3-up', 'button3-down');
+    // this.buttonC.onDown.add(this.pressButtonC, this);
 
     this.stage.backgroundColor = '#000000';
 
@@ -132,18 +133,18 @@ BasicGame.Game.prototype = {
     }
   },
 
-  pressButtonB: function () {
+  // pressButtonB: function () {
 
-      // this.sprite.scale.set(Math.random() * 4);
-      this.sprite.scale.set(Math.random() * 4);
+  //     // this.sprite.scale.set(Math.random() * 4);
+  //     this.sprite.scale.set(Math.random() * 4);
 
-  },
+  // },
 
-  pressButtonC: function () {
+  // pressButtonC: function () {
 
-      // this.sprite.scale.set(1);
-      // this.sprite.tint = 0xFFFFFF;
-  },
+  //     // this.sprite.scale.set(1);
+  //     // this.sprite.tint = 0xFFFFFF;
+  // },
 
 
   update: function () {
@@ -223,18 +224,18 @@ BasicGame.Game.prototype = {
   },
 
   resize: function(){
-    this.stick.destroy();
-    this.stick = this.pad.addDPad(0, 0, 200, 'dpad');
-    this.stick.alignBottomLeft(0);
-    this.buttonA.destroy();
-    this.buttonA = this.pad.addButton((this.game.width - 300), (this.game.height - 80), 'dpad', 'button1-up', 'button1-down');
-    this.buttonA.onDown.add(this.pressButtonA, this);
-    this.buttonB.destroy();
-    this.buttonB = this.pad.addButton((this.game.width - 200), (this.game.height - 160), 'dpad', 'button2-up', 'button2-down');
-    this.buttonB.onDown.add(this.pressButtonB, this);
-    this.buttonC.destroy();
-    this.buttonC = this.pad.addButton((this.game.width - 100), (this.game.height - 80), 'dpad', 'button3-up', 'button3-down');
-    this.buttonC.onDown.add(this.pressButtonC, this);
+    // this.stick.destroy();
+    // this.stick = this.pad.addDPad(0, 0, 200, 'dpad');
+    // this.stick.alignBottomLeft(0);
+    // this.buttonA.destroy();
+    // this.buttonA = this.pad.addButton((this.game.width - 300), (this.game.height - 80), 'dpad', 'button1-up', 'button1-down');
+    // this.buttonA.onDown.add(this.pressButtonA, this);
+    // this.buttonB.destroy();
+    // this.buttonB = this.pad.addButton((this.game.width - 200), (this.game.height - 160), 'dpad', 'button2-up', 'button2-down');
+    // this.buttonB.onDown.add(this.pressButtonB, this);
+    // this.buttonC.destroy();
+    // this.buttonC = this.pad.addButton((this.game.width - 100), (this.game.height - 80), 'dpad', 'button3-up', 'button3-down');
+    // this.buttonC.onDown.add(this.pressButtonC, this);
     // bg.x = 0;
     // bg.y = 0;
     // bg.height = this.game.height;
@@ -242,7 +243,7 @@ BasicGame.Game.prototype = {
     // bg.fixedToCamera = true;
     layer.destroy();
     layer = map.createLayer('Tile Layer 1');
-
+    this.buttonA.alignBottomRight(0);
     //  Un-comment this on to see the collision tiles
     // layer.debug = true;
 
