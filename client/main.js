@@ -26,3 +26,13 @@ Template.game.rendered = function(){
     });
   }, 10)
 };
+
+Template.game.helpers({
+  gameGestures: {
+    'swipeleft ul li': function (event, templateInstance) {
+      /* `event` is the Hammer.js event object */
+      /* `templateInstance` is the `Blaze.TemplateInstance` */
+      /* `this` is the data context of the element in your template, so in this case `someField` from `someArray` in the template */
+    }
+  }
+});

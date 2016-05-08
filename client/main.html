@@ -2,9 +2,11 @@
 </head>
 
 <body>
-  {{> game}}
+    {{> game}}
 </body>
 
 <template name="game">
-  {{game}}
+  {{#HammerTouchArea gestureMap=gameGestures}}
+    {{game}}
+  {{/HammerTouchArea}}
 </template>
