@@ -41,7 +41,7 @@ BasicGame.Preloader.prototype = {
       this.load.image('starSmall', 'assets/star.png');
       this.load.image('starBig', 'assets/star2.png');
       this.load.image('background', 'assets/background2.png');
-
+      this.load.spritesheet('menu', 'assets/buttons/number-buttons-90x90.png', 270, 180);
   },
 
   create: function () {
