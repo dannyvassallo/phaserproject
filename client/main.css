@@ -19,3 +19,10 @@ canvas{
   height: 50px;
   background-color: red;
 }
+
+.buttonA{
+  position: absolute;
+  width: 100px;
+  background: green;
+  height: 100px;
+}

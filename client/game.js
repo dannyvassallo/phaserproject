@@ -6,8 +6,10 @@ var jumpTimer = 0;
 var cursors;
 var jumpButton;
 var bg;
+var menu;
+var game;
 
-BasicGame.Game = function (game) {
+BasicGame.Game = function () {
   //  When a State is added to Phaser it automatically has the following properties set on it, even if they already exist:
 
     this.game;    //  a reference to the currently running game
@@ -49,8 +51,18 @@ BasicGame.Game.prototype = {
     this.physics.startSystem(Phaser.Physics.ARCADE);
   },
 
+  preload: function () {
+
+      this.load.atlas('dpad', 'assets/virtualjoystick/skins/dpad.png', 'assets/virtualjoystick/skins/dpad.json');
+      this.load.image('ball', 'assets/virtualjoystick/beball1.png');
+      this.load.image('bg', 'assets/virtualjoystick/space2.png');
+      this.input.maxPointers = 2;
+
+  },
+
   create: function () {
     // this.physics.arcade.enable(this.sprite);
+    game = this.game;
 
     this.pad = this.game.plugins.add(Phaser.VirtualJoystick);
 
@@ -60,12 +72,16 @@ BasicGame.Game.prototype = {
     this.buttonA = this.pad.addButton((this.game.width - 300), (this.game.height - 80), 'dpad', 'button1-up', 'button1-down');
     this.buttonA.onDown.add(this.pressButtonA, this);
     this.buttonA.addKey(Phaser.Keyboard.SPACEBAR);
+    this.buttonA.alignBottomRight(0);
+    // var tapDiv = $('<div>').addClass('buttonA');
+    // $(tapDiv).css('left',(this.game.width - 350));
+    // $(tapDiv).css('top',(this.game.height - 130));
+    // $('body').append(tapDiv);
+    // this.buttonB = this.pad.addButton((this.game.width - 200), (this.game.height - 160), 'dpad', 'button2-up', 'button2-down');
+    // this.buttonB.onDown.add(this.pressButtonB, this);
 
-    this.buttonB = this.pad.addButton((this.game.width - 200), (this.game.height - 160), 'dpad', 'button2-up', 'button2-down');
-    this.buttonB.onDown.add(this.pressButtonB, this);
-
-    this.buttonC = this.pad.addButton((this.game.width - 100), (this.game.height - 80), 'dpad', 'button3-up', 'button3-down');
-    this.buttonC.onDown.add(this.pressButtonC, this);
+    // this.buttonC = this.pad.addButton((this.game.width - 100), (this.game.height - 80), 'dpad', 'button3-up', 'button3-down');
+    // this.buttonC.onDown.add(this.pressButtonC, this);
 
     this.stage.backgroundColor = '#000000';
 
@@ -107,27 +123,86 @@ BasicGame.Game.prototype = {
     cursors = this.input.keyboard.createCursorKeys();
     jumpButton = this.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 
+    // Create a label to use as a button
+    var w = this.game.width, h = this.game.height;
+    pause_label = this.add.text(w - 100, 20, 'Pause', { font: '24px Arial', fill: '#fff' });
+    pause_label.inputEnabled = true;
+    pause_label.events.onInputUp.add(function () {
+        // When the paus button is pressed, we pause the game
+        game.paused = true;
+
+        // Then add the menu
+        menu = game.add.sprite(w/2, h/2, 'menu');
+        menu.anchor.setTo(0.5, 0.5);
+
+        // And a label to illustrate which menu item was chosen. (This is not necessary)
+        choiseLabel = game.add.text(w/2, h-150, 'Click outside menu to continue', { font: '30px Arial', fill: '#fff' });
+        choiseLabel.anchor.setTo(0.5, 0.5);
+    });
+
+    // Add a input listener that can help us return from being paused
+    this.input.onDown.add(unpause, self);
+
+    // And finally the method that handels the pause menu
+    function unpause(event){
+        // Only act if paused
+        if(game.paused){
+            // Calculate the corners of the menu
+            var x1 = w/2 - 270/2, x2 = w/2 + 270/2,
+                y1 = h/2 - 180/2, y2 = h/2 + 180/2;
+
+            // Check if the click was inside the menu
+            if(event.x > x1 && event.x < x2 && event.y > y1 && event.y < y2 ){
+                // The choicemap is an array that will help us see which item was clicked
+                var choisemap = ['one', 'two', 'three', 'four', 'five', 'six'];
+
+                // Get menu local coordinates for the click
+                var x = event.x - x1,
+                    y = event.y - y1;
+
+                // Calculate the choice
+                var choise = Math.floor(x / 90) + 3*Math.floor(y / 90);
+
+                // Display the choice
+                choiseLabel.text = 'You chose menu item: ' + choisemap[choise];
+            }
+            else{
+                // Remove the menu and the label
+                menu.destroy();
+                choiseLabel.destroy();
+
+                // Unpause the this
+                game.paused = false;
+            }
+        }
+    };
+
   },
 
   pressButtonA: function () {
-    if( this.sprite.body.onFloor() && this.time.now > jumpTimer ){
+    if(this.input.pointer1.isDown && this.sprite.body.onFloor() && this.time.now > jumpTimer)
+    {
+      this.sprite.body.velocity.y = -250;
+      jumpTimer = this.time.now + 750;
+    }
+    else if(this.sprite.body.onFloor() && this.time.now > jumpTimer ){
       this.sprite.body.velocity.y = -250;
       jumpTimer = this.time.now + 750;
     }
   },
 
-  pressButtonB: function () {
+  // pressButtonB: function () {
 
-      // this.sprite.scale.set(Math.random() * 4);
-      this.sprite.scale.set(Math.random() * 4);
+  //     // this.sprite.scale.set(Math.random() * 4);
+  //     this.sprite.scale.set(Math.random() * 4);
 
-  },
+  // },
 
-  pressButtonC: function () {
+  // pressButtonC: function () {
 
-      // this.sprite.scale.set(1);
-      // this.sprite.tint = 0xFFFFFF;
-  },
+  //     // this.sprite.scale.set(1);
+  //     // this.sprite.tint = 0xFFFFFF;
+  // },
 
 
   update: function () {
@@ -207,18 +282,8 @@ BasicGame.Game.prototype = {
   },
 
   resize: function(){
-    this.stick.destroy();
-    this.stick = this.pad.addDPad(0, 0, 200, 'dpad');
     this.stick.alignBottomLeft(0);
-    this.buttonA.destroy();
-    this.buttonA = this.pad.addButton((this.game.width - 300), (this.game.height - 80), 'dpad', 'button1-up', 'button1-down');
-    this.buttonA.onDown.add(this.pressButtonA, this);
-    this.buttonB.destroy();
-    this.buttonB = this.pad.addButton((this.game.width - 200), (this.game.height - 160), 'dpad', 'button2-up', 'button2-down');
-    this.buttonB.onDown.add(this.pressButtonB, this);
-    this.buttonC.destroy();
-    this.buttonC = this.pad.addButton((this.game.width - 100), (this.game.height - 80), 'dpad', 'button3-up', 'button3-down');
-    this.buttonC.onDown.add(this.pressButtonC, this);
+    this.buttonA.alignBottomRight(0);
     bg.x = 0;
     bg.y = 0;
     bg.height = this.game.height;
@@ -226,7 +291,6 @@ BasicGame.Game.prototype = {
     bg.fixedToCamera = true;
     layer.destroy();
     layer = map.createLayer('Tile Layer 1');
-
     //  Un-comment this on to see the collision tiles
     // layer.debug = true;
 
