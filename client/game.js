@@ -127,17 +127,22 @@ BasicGame.Game.prototype = {
     var w = this.game.width, h = this.game.height;
     pause_label = this.add.text(w - 100, 20, 'Pause', { font: '24px Arial', fill: '#fff' });
     pause_label.inputEnabled = true;
+    pause_label.fixedToCamera = true;
+    //add the menu
+    menu = game.add.sprite(w/2, h/2, 'menu');
+    menu.anchor.setTo(0.5, 0.5);
+    menu.fixedToCamera = true;
+    menu.alpha = 0;
+    // add the label
+    choiceLabel = game.add.text(w/2, h-150, 'Click outside menu to continue', { font: '30px Arial', fill: '#fff' });
+    choiceLabel.anchor.setTo(0.5, 0.5);
+    choiceLabel.fixedToCamera = true;
+    choiceLabel.alpha = 0;
+
     pause_label.events.onInputUp.add(function () {
-        // When the paus button is pressed, we pause the game
         game.paused = true;
-
-        // Then add the menu
-        menu = game.add.sprite(w/2, h/2, 'menu');
-        menu.anchor.setTo(0.5, 0.5);
-
-        // And a label to illustrate which menu item was chosen. (This is not necessary)
-        choiseLabel = game.add.text(w/2, h-150, 'Click outside menu to continue', { font: '30px Arial', fill: '#fff' });
-        choiseLabel.anchor.setTo(0.5, 0.5);
+        menu.alpha = 1;
+        choiceLabel.alpha = 1;
     });
 
     // Add a input listener that can help us return from being paused
@@ -154,22 +159,22 @@ BasicGame.Game.prototype = {
             // Check if the click was inside the menu
             if(event.x > x1 && event.x < x2 && event.y > y1 && event.y < y2 ){
                 // The choicemap is an array that will help us see which item was clicked
-                var choisemap = ['one', 'two', 'three', 'four', 'five', 'six'];
+                var choicemap = ['one', 'two', 'three', 'four', 'five', 'six'];
 
                 // Get menu local coordinates for the click
                 var x = event.x - x1,
                     y = event.y - y1;
 
                 // Calculate the choice
-                var choise = Math.floor(x / 90) + 3*Math.floor(y / 90);
+                var choice = Math.floor(x / 90) + 3*Math.floor(y / 90);
 
                 // Display the choice
-                choiseLabel.text = 'You chose menu item: ' + choisemap[choise];
+                choiceLabel.text = 'You chose menu item: ' + choicemap[choice];
             }
             else{
                 // Remove the menu and the label
-                menu.destroy();
-                choiseLabel.destroy();
+                menu.alpha = 0;
+                choiceLabel.alpha = 0;
 
                 // Unpause the this
                 game.paused = false;
@@ -298,9 +303,9 @@ BasicGame.Game.prototype = {
   },
 
   render: function(game){
-    // game.debug.text(game.time.physicsElapsed, 32, 32);
-    // game.debug.body(this.sprite);
-    // game.debug.bodyInfo(this.sprite, 16, 24);
+    game.debug.text(game.time.physicsElapsed, 32, 32);
+    game.debug.body(this.sprite);
+    game.debug.bodyInfo(this.sprite, 16, 24);
   }
 
 };
