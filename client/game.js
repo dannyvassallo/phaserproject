@@ -8,6 +8,7 @@ var jumpButton;
 var bg;
 var menu;
 var game;
+var ui;
 
 BasicGame.Game = function () {
   //  When a State is added to Phaser it automatically has the following properties set on it, even if they already exist:
@@ -63,6 +64,8 @@ BasicGame.Game.prototype = {
   create: function () {
     // this.physics.arcade.enable(this.sprite);
     game = this.game;
+
+    ui = game.add.group();
 
     this.pad = this.game.plugins.add(Phaser.VirtualJoystick);
 
@@ -127,7 +130,7 @@ BasicGame.Game.prototype = {
 
     // Create a label to use as a button
     var w = this.game.width, h = this.game.height;
-    pause_label = this.add.text(w - 100, 20, 'Pause', { font: '24px Arial', fill: '#fff' });
+    pause_label = this.add.text(w - 100, 20, 'Pause', { font: '24px Arial', fill: '#fff' }, ui);
     pause_label.inputEnabled = true;
     pause_label.fixedToCamera = true;
     //add the menu
@@ -136,7 +139,7 @@ BasicGame.Game.prototype = {
     menu.fixedToCamera = true;
     menu.alpha = 0;
     // add the label
-    choiceLabel = game.add.text(w/2, h-150, 'Click outside menu to continue', { font: '30px Arial', fill: '#fff' });
+    choiceLabel = game.add.text(w/2, h-150, 'Click outside menu to continue', { font: '30px Arial', fill: '#fff' }, ui);
     choiceLabel.anchor.setTo(0.5, 0.5);
     choiceLabel.fixedToCamera = true;
     choiceLabel.alpha = 0;
@@ -292,15 +295,15 @@ BasicGame.Game.prototype = {
         // Draw shadow
         this.shadowTexture.context.fillStyle = 'rgb(10, 10, 10)';
         this.shadowTexture.context.fillRect(0, 0, this.game.width, this.game.height);
-        var radius = 100 + this.game.rnd.integerInRange(1,10),
-        heroX = this.sprite.x - this.game.camera.x,
-        heroY = this.sprite.y - this.game.camera.y;
+        var radius = 150 + this.game.rnd.integerInRange(1,10),
+        playerX = this.sprite.x - this.game.camera.x,
+        playerY = this.sprite.y - this.game.camera.y;
         // Draw circle of light with a soft edge
-        var gradient = this.shadowTexture.context.createRadialGradient(heroX, heroY, 100 * 0.75,heroX, heroY, radius);
+        var gradient = this.shadowTexture.context.createRadialGradient(playerX, playerY, 100 * 0.75,playerX, playerY, radius);
         gradient.addColorStop(0, 'rgba(255, 255, 255, 1.0)');    gradient.addColorStop(1, 'rgba(255, 255, 255, 0.0)');
         this.shadowTexture.context.beginPath();
         this.shadowTexture.context.fillStyle = gradient;
-        this.shadowTexture.context.arc(heroX, heroY, radius, 0, Math.PI*2, false);
+        this.shadowTexture.context.arc(playerX, playerY, radius, 0, Math.PI*2, false);
         this.shadowTexture.context.fill();    // This just tells the engine it should update the texture cache
         this.shadowTexture.dirty = true;
 
