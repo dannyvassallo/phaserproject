@@ -306,8 +306,8 @@ BasicGame.Game.prototype = {
         this.shadowTexture.context.fillStyle = 'rgb(10, 10, 10)';
         this.shadowTexture.context.fillRect(0, 0, this.game.width, this.game.height);
         var radius = 150 + this.game.rnd.integerInRange(1,10),
-        playerX = this.sprite.x - this.game.camera.x,
-        playerY = this.sprite.y - this.game.camera.y;
+        playerX = this.sprite.x - this.game.camera.x + 32,
+        playerY = this.sprite.y - this.game.camera.y + 64;
         // Draw circle of light with a soft edge
         var gradient = this.shadowTexture.context.createRadialGradient(playerX, playerY, 100 * 0.75,playerX, playerY, radius);
         gradient.addColorStop(0, 'rgba(255, 255, 255, 1.0)');    gradient.addColorStop(1, 'rgba(255, 255, 255, 0.0)');
