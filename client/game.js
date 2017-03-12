@@ -68,11 +68,13 @@ BasicGame.Game.prototype = {
 
     this.stick = this.pad.addDPad(0, 0, 200, 'dpad');
     this.stick.alignBottomLeft(0);
+    stick = this.stick;
 
     this.buttonA = this.pad.addButton((this.game.width - 300), (this.game.height - 80), 'dpad', 'button1-up', 'button1-down');
     this.buttonA.onDown.add(this.pressButtonA, this);
     this.buttonA.addKey(Phaser.Keyboard.SPACEBAR);
     this.buttonA.alignBottomRight(0);
+    buttonA = this.buttonA;
     // var tapDiv = $('<div>').addClass('buttonA');
     // $(tapDiv).css('left',(this.game.width - 350));
     // $(tapDiv).css('top',(this.game.height - 130));
@@ -143,6 +145,8 @@ BasicGame.Game.prototype = {
         game.paused = true;
         menu.alpha = 1;
         choiceLabel.alpha = 1;
+        stick.alpha = 0;
+        buttonA.alpha = 0;
     });
 
     // Add a input listener that can help us return from being paused
@@ -175,7 +179,8 @@ BasicGame.Game.prototype = {
                 // Remove the menu and the label
                 menu.alpha = 0;
                 choiceLabel.alpha = 0;
-
+                stick.alpha = 1;
+                buttonA.alpha = 1;
                 // Unpause the this
                 game.paused = false;
             }
