@@ -117,13 +117,13 @@ BasicGame.Game.prototype = {
 
     this.physics.arcade.gravity.y = 450;
 
-    this.sprite = this.add.sprite(32, 32, 'dude');
+    this.sprite = this.add.sprite(64, 64, 'dude');
     gameSprites.add(this.sprite)
     this.physics.enable(this.sprite, Phaser.Physics.ARCADE);
 
     this.sprite.body.bounce.y = 0.1;
     this.sprite.body.collideWorldBounds = true;
-    this.sprite.body.setSize(20, 32, 5, 16);
+    this.sprite.body.setSize(40, 64, 10, 32);
 
     this.sprite.animations.add('left', [0, 1, 2, 3], 10, true);
     this.sprite.animations.add('turn', [4], 20, true);
