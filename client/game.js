@@ -72,14 +72,18 @@ BasicGame.Game.prototype = {
     this.pad = this.game.plugins.add(Phaser.VirtualJoystick);
 
     this.stick = this.pad.addDPad(0, 0, 200, 'dpad');
-    this.stick.alignBottomLeft(0);
+    this.stick.alignBottomLeft(-40);
     stick = this.stick;
+    stick.scale = 0.5;
+    stick.alpha = 0.5;
 
     this.buttonA = this.pad.addButton((this.game.width - 300), (this.game.height - 80), 'dpad', 'button1-up', 'button1-down');
     this.buttonA.onDown.add(this.pressButtonA, this);
     this.buttonA.addKey(Phaser.Keyboard.SPACEBAR);
     this.buttonA.alignBottomRight(0);
     buttonA = this.buttonA;
+    buttonA.alpha = 0.5;
+    buttonA.scale = 0.8;
     // var tapDiv = $('<div>').addClass('buttonA');
     // $(tapDiv).css('left',(this.game.width - 350));
     // $(tapDiv).css('top',(this.game.height - 130));
@@ -192,8 +196,8 @@ BasicGame.Game.prototype = {
                 // Remove the menu and the label
                 menu.alpha = 0;
                 choiceLabel.alpha = 0;
-                stick.alpha = 1;
-                buttonA.alpha = 1;
+                stick.alpha = 0.5;
+                buttonA.alpha = 0.5;
                 // Unpause the this
                 game.paused = false;
             }
@@ -305,11 +309,16 @@ BasicGame.Game.prototype = {
 
         //LIGHTING
         this.lightSprite.reset(this.game.camera.x, this.game.camera.y);
-        this.updateShadowTexture();},updateShadowTexture: function(){
+        this.updateShadowTexture();
+    },
+
+    updateShadowTexture: function(){
         // Draw shadow
         this.shadowTexture.context.fillStyle = 'rgb(10, 10, 10)';
         this.shadowTexture.context.fillRect(0, 0, this.game.width, this.game.height);
-        var radius = 200 + this.game.rnd.integerInRange(1,10),
+        // flicker
+        // var radius = 300 + this.game.rnd.integerInRange(1,10),
+        var radius = 300,
         playerX = this.sprite.x - this.game.camera.x + 32,
         playerY = this.sprite.y - this.game.camera.y + 64;
         // Draw circle of light with a soft edge
