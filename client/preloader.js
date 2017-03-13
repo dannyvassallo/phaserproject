@@ -35,7 +35,7 @@ BasicGame.Preloader.prototype = {
       this.load.image('hotdog', 'assets/sprites/hotdog.png');
       this.load.image('starfield', 'assets/skies/deep-space.jpg');
       this.load.tilemap('level1', 'assets/level1.json', null, Phaser.Tilemap.TILED_JSON);
-      this.load.image('tiles-1', 'assets/tiles-1.png');
+      this.load.image('tiles-12', 'assets/tiles-12.png');
       this.load.spritesheet('dude', 'assets/dude2.png', 64, 96);
       this.load.spritesheet('droid', 'assets/droid.png', 32, 32);
       this.load.image('starSmall', 'assets/star.png');

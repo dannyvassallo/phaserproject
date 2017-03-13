@@ -103,7 +103,7 @@ BasicGame.Game.prototype = {
 
     map = this.add.tilemap('level1');
 
-    map.addTilesetImage('tiles-1');
+    map.addTilesetImage('tiles-12');
 
     map.setCollisionByExclusion([ 13, 14, 15, 16, 46, 47, 48, 49, 50, 51 ]);
 
@@ -117,7 +117,7 @@ BasicGame.Game.prototype = {
 
     this.physics.arcade.gravity.y = 450;
 
-    this.sprite = this.add.sprite(64, 64, 'dude');
+    this.sprite = this.game.add.sprite(64, 64, 'dude');
     gameSprites.add(this.sprite)
     this.physics.enable(this.sprite, Phaser.Physics.ARCADE);
 
@@ -305,7 +305,7 @@ BasicGame.Game.prototype = {
         // Draw shadow
         this.shadowTexture.context.fillStyle = 'rgb(10, 10, 10)';
         this.shadowTexture.context.fillRect(0, 0, this.game.width, this.game.height);
-        var radius = 150 + this.game.rnd.integerInRange(1,10),
+        var radius = 200 + this.game.rnd.integerInRange(1,10),
         playerX = this.sprite.x - this.game.camera.x + 32,
         playerY = this.sprite.y - this.game.camera.y + 64;
         // Draw circle of light with a soft edge
