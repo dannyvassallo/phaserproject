@@ -117,8 +117,12 @@ BasicGame.Game.prototype = {
 
     this.physics.arcade.gravity.y = 450;
 
-    this.sprite = this.game.add.sprite(64, 64, 'dude');
+    this.sprite = this.game.add.sprite(2, 1376, 'dude');
     gameSprites.add(this.sprite)
+
+
+    console.log(this.sprite.x, this.sprite.y);
+
     this.physics.enable(this.sprite, Phaser.Physics.ARCADE);
 
     this.sprite.body.bounce.y = 0.1;
@@ -346,9 +350,9 @@ BasicGame.Game.prototype = {
   },
 
   render: function(game){
-    game.debug.text(game.time.physicsElapsed, 32, 32);
-    game.debug.body(this.sprite);
-    game.debug.bodyInfo(this.sprite, 16, 24);
+    // game.debug.text(game.time.physicsElapsed, 32, 32);
+    // game.debug.body(this.sprite);
+    // game.debug.bodyInfo(this.sprite, 16, 24);
   }
 
 };
